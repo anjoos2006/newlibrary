@@ -13,6 +13,9 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { UpdatebookComponent } from './updatebook/updatebook.component';
 
+import { BookService } from './book.service';
+import { UserService } from './user.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +34,7 @@ import { UpdatebookComponent } from './updatebook/updatebook.component';
     FormsModule
 
   ],
-  providers: [],
+  providers: [BookService,UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

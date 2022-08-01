@@ -7,10 +7,21 @@ import { HttpClient } from '@angular/common/http';
 export class UserService {
 
   constructor(private http:HttpClient) { }
+
   newUsers(nuser: any) {
     console.log("nuser")
     console.log(nuser)
     return this.http.post("http://localhost:3000/users/signup", { "User": nuser })
       .subscribe(data => { console.log(data) })
+  };
+
+  userLogin(user:any){
+    console.log("user in service",user)
+    return this.http.post("http://localhost:3000/users/login",{"User": user})
+    .subscribe((data)=>{
+      console.log('success')
+    })
   }
+
 }
+

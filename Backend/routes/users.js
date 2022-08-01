@@ -29,30 +29,42 @@ router.post('/signup', async (req, res) => {
      }   
 });
 
-    router.get("/login", (req,res) => {
-       
+router.post("/login", async (req,res) => {
+    var flag=false;
     console.log("check")
-    console.log(req.params);
-    var flag=false; 
-        User.findOne({"username":req.params.username},function(err,result){
-        if (err) {
-            console.log(err);
-            res.send({error: "An error has occurred"});
-          } else {
-            if (result == null) {
-              res.send({"error": "This email address is not recognised, please check you have entered your email correctly"});
+        console.log(req.body.User);
+        const pwd = req.body.User.password;
+        console.log("pwd",pwd)
+        const uname = req.body.User.username;
+        console.log("uname",uname);
+    try{
+        const getUser = await User.findOne({"username":uname}); 
+        // res.json(getUser);
+        console.log("getUser"+getUser);
+        if (getUser == null) {
+            console.log("In null")
+            res.json({"error": "This email address is not recognised, please check you have entered your email correctly"});
+          } 
+        else{
+            console.log("In not null")
+          if (pwd == getUser.password){
+            console.log("Valid login")
+            res.send("Login successful")
+            flag = true
+            console.log(getUser);
+            
             } 
-            else {
-              console.log("Email recognised");
-                        
-              if (req.body.password !== result.password){
-                res.send({"error":"Sorry your password is incorrect"});
-              } else {
-                res.send("Login successful")
-              };
-            }
+          else{
+            res.json({"error":"Sorry your password is incorrect"});
+            console.log("Incorrect password");
           }
-        })
-    });
+        }
+        }catch(err){
+            console.log("In error /book");
+            res.json({message: err})
+        }
+    }
+  );
+
 
 module.exports = router;
