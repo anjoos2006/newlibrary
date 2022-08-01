@@ -31,14 +31,15 @@ router.post('/signup', async (req, res) => {
 
 router.post("/login", async (req,res) => {
     var flag=false;
-    console.log("check")
-        console.log(req.body.User);
+    
         const pwd = req.body.User.password;
-        console.log("pwd",pwd)
+        
         const uname = req.body.User.username;
-        console.log("uname",uname);
-    try{
-        const getUser = await User.findOne({"username":uname}); 
+
+        let getUser;
+        
+    
+        await User.findOne({"username":uname}).then(function(getUser){
         // res.json(getUser);
         console.log("getUser"+getUser);
         if (getUser == null) {
@@ -59,12 +60,8 @@ router.post("/login", async (req,res) => {
             console.log("Incorrect password");
           }
         }
-        }catch(err){
-            console.log("In error /book");
-            res.json({message: err})
-        }
+        
     }
-  );
-
-
-module.exports = router;
+  )})
+  
+  module.exports = router;
