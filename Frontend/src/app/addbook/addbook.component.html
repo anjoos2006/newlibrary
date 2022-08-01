@@ -1,0 +1,32 @@
+<div class="container">
+<form (ngSubmit)="Addbook()" class="container addbook text-center border border-light p-5 justify-content-center" action="/books/add" method="POST">
+
+
+
+    <p class="h4 mb-4">Add Book Form</p>
+
+    <!-- Title -->
+    <input id="title" name="title" type="text"  [(ngModel)]="abooks.title" class="form-control mb-4" placeholder="Book Name" >
+
+    <br>
+    <!-- Author -->
+    <input id="author" name="author" type="text" [(ngModel)]="abooks.author" class="form-control mb-4" placeholder="Author Name">
+
+    <br>
+    <!-- Image -->
+    <input id="image" name="image" type="text"  [(ngModel)]="abooks.image" class="form-control mb-4" placeholder="Image URL">
+
+
+    <br>
+    <!-- About -->
+    <input id="about" name="about" type="text" [(ngModel)]="abooks.about" class="form-control mb-4" placeholder="Book details">
+
+    <br>
+
+
+    <!-- Send button -->
+    <button id="addbtn" class="btn btn-success" type="submit">Add Book</button>
+   
+  
+</form>
+</div>

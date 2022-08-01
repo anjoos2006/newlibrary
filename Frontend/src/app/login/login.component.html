@@ -1,0 +1,22 @@
+<div class="container">
+    <form (ngSubmit)="usercheck()" class="container addbook text-center border border-light p-5 justify-content-center" action="/books/add" method="POST">
+    
+    
+    
+        <p class="h4 mb-4">Please Logine here</p>
+    
+        <!-- Username -->
+        <input id="username" name="username" type="text"  [(ngModel)]="user.username" class="form-control mb-4" placeholder="user name" >
+    
+        <br>
+        <!-- Password -->
+        <input id="password" name="password" type="text" [(ngModel)]="user.password" class="form-control mb-4" placeholder="Author Name">
+    
+        <br>
+            
+        <!-- Send button -->
+        <button id="loginbtn" class="btn btn-success" type="submit">Login</button>
+       
+      
+    </form>
+    </div>
