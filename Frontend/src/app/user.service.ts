@@ -5,13 +5,13 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserService {
-
+  server_address: string = 'api';
   constructor(private http:HttpClient) { }
 
   newUsers(nuser: any) {
     console.log("nuser")
     console.log(nuser)
-    return this.http.post("http://localhost:3000/users/signup", { "User": nuser })
+    return this.http.post<any>(`${this.server_address}/users/signup`, { "User": nuser })
       // .subscribe(data => { console.log(data) })
   };
 
@@ -25,7 +25,7 @@ export class UserService {
 
   userLogin(user:any){
     console.log("user in service",user)
-    return this.http.post<any>("http://localhost:3000/users/login",{"User": user},this.httpOptions)
+    return this.http.post<any>(`${this.server_address}/users/login`,{"User": user},this.httpOptions)
     // .subscribe((data)=>{
     //   console.log('success')
     //   console.log(data)

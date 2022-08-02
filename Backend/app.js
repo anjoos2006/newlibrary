@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 require('dotenv/config');
 const  cors = require('cors');
 const jwt = require('jsonwebtoken');
+const path = require('path');
 
 
 const app = express();
@@ -10,6 +11,7 @@ const app = express();
 // Middleware
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json());
+app.use(express.static('./dist/frontend'));
 
 app.use(cors());
 
@@ -22,6 +24,12 @@ const usersRoute = require('./routes/users');
 
 app.use('/books',booksRoute);
 app.use('/users',usersRoute);
+
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname + '/dist/frontend/index.html'));
+   });
+   
+   process.env.PORT || 3000
 
 // Connect to DB
 mongoose.connect(process.env.dbUrl, { useNewUrlParser: true }, () => { 

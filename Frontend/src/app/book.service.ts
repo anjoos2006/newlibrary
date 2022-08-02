@@ -5,25 +5,25 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class BookService {
-
+  server_address: string = 'api';
   constructor(private http:HttpClient) { }
   getBooks(){
-    return this.http.get("http://localhost:3000/books")
+    return this.http.get<any>(`${this.server_address}/books`)
   }
   newBooks(nbook: any) {
-    return this.http.post("http://localhost:3000/books/add", { "Book": nbook })
+    return this.http.post<any>(`${this.server_address}/books/add`, { "Book": nbook })
       .subscribe(data => { console.log(data) })
   }
   delBook(id:any)
   {
-    return this.http.delete("http://localhost:3000/books/remove/"+id)
+    return this.http.delete<any>(`${this.server_address}/books/remove/`+id)
   }
   getBook(id:any){
-    return this.http.get("http://localhost:3000/books/"+id)
+    return this.http.get<any>(`${this.server_address}/books/`+id)
   }
   edBook(book:any){
     console.log("Book update");
-    return this.http.put("http://localhost:3000/books/update/",book)
+    return this.http.put<any>(`${this.server_address}/books/update/`,book)
     .subscribe(data => {console.log(data)})
   }
 }

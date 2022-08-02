@@ -2,7 +2,7 @@ const express = require ('express');
 const router = express.Router();
 const Book = require('../models/book');
 
-router.get('/', async (req, res) => {
+router.get('/api/', async (req, res) => {
     try{
         const book = await Book.find(); 
         res.json(book);
@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/:id', async (req,res)=>{
+router.get('/api/:id', async (req,res)=>{
     console.log("in book route");
     console.log(req.params);
     try{
@@ -26,7 +26,7 @@ router.get('/:id', async (req,res)=>{
     }
   })
 
-router.delete('/remove/:id', async (req,res)=>{
+router.delete('/api/remove/:id', async (req,res)=>{
     try{
         const deletedBook = await Book.findByIdAndDelete({"_id":id}); 
         res.json(deletedBook);
@@ -37,7 +37,7 @@ router.delete('/remove/:id', async (req,res)=>{
     }
   })
 
-router.post('/add', async (req, res) => {
+router.post('/api/add', async (req, res) => {
     console.log("in book route");
     console.log(req.body.Book.title);
     console.log("req body:");
@@ -59,7 +59,7 @@ router.post('/add', async (req, res) => {
      }   
 });
 
-router.put('/update', async (req, res) => {
+router.put('/api/update', async (req, res) => {
     console.log("in book route");
     console.log(req.body.title);
     console.log("req body:");

@@ -8,7 +8,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 
-router.post('/signup', async (req, res) => {
+router.post('/api/signup', async (req, res) => {
     console.log("in user route");
     console.log(req.body.User.email);
     console.log("req body:");
@@ -30,7 +30,7 @@ router.post('/signup', async (req, res) => {
      }   
 });
 
-router.post("/login", async (req,res) => {
+router.post("/api/login", async (req,res) => {
     var flag=false;
     
         const pwd = req.body.User.password;
