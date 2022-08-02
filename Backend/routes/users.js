@@ -2,6 +2,7 @@ const express = require ('express');
 const router = express.Router();
 const User = require('../models/user');
 const app = express();
+const jwt = require('jsonwebtoken');
 
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json());
@@ -36,7 +37,7 @@ router.post("/login", async (req,res) => {
         
         const uname = req.body.User.username;
 
-        let getUser;
+        // let getUser;
         
     
         await User.findOne({"username":uname}).then(function(getUser){
@@ -50,10 +51,13 @@ router.post("/login", async (req,res) => {
             console.log("In not null")
           if (pwd == getUser.password){
             console.log("Valid login")
-            res.send("Login successful")
+            
             flag = true
             console.log(getUser);
-            
+            let payload={subject:getUser.username+getUser.password}
+            let token = jwt.sign(payload,'secretKey')
+            console.log("token is",token)
+            res.status(200).send(token) 
             } 
           else{
             res.json({"error":"Sorry your password is incorrect"});

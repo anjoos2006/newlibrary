@@ -26,11 +26,14 @@ export class LoginComponent implements OnInit {
     console.log("this.user");
     console.log(this.user);
      this.userService.userLogin(this.user)
-    //  .subscribe((data) => {
-    //   this.ruser = JSON.parse(JSON.stringify(data))
-    //   console.log("ruser");
-    //   console.log(this.ruser);
-    // })
+        .subscribe(
+          res =>{
+            console.log("res is",res)
+            // console.log("res.token is",res.token)
+            localStorage.setItem('token',res)
+            this.router.navigate(['/books'])
+          }
+        )
   }
 
 }

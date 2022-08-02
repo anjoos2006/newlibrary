@@ -12,7 +12,7 @@ export class UserService {
     console.log("nuser")
     console.log(nuser)
     return this.http.post("http://localhost:3000/users/signup", { "User": nuser })
-      .subscribe(data => { console.log(data) })
+      // .subscribe(data => { console.log(data) })
   };
 
   httpOptions = {
@@ -25,11 +25,14 @@ export class UserService {
 
   userLogin(user:any){
     console.log("user in service",user)
-    return this.http.post("http://localhost:3000/users/login",{"User": user},this.httpOptions)
-    .subscribe((data)=>{
-      console.log('success')
-      console.log(data)
-    })
+    return this.http.post<any>("http://localhost:3000/users/login",{"User": user},this.httpOptions)
+    // .subscribe((data)=>{
+    //   console.log('success')
+    //   console.log(data)
+    // })
+  }
+  loggedIn(){
+    return !!localStorage.getItem('token')
   }
 
 }
